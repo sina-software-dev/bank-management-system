@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public class Prompt {
 
-    public static String FirstTime() {
+    public static String start() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("You are new to this application?(yes/no)");
         return scanner.nextLine();
@@ -73,11 +73,11 @@ public class Prompt {
         System.out.print("What is your birthDay (YYYY/MM/DD):");
         String birthDayAsString = scanner.nextLine();
         if(birthDayAsString == null || birthDayAsString.isBlank() ||
-                !Pattern.matches("^\\d{4}/\\d{2}/\\d{2}$", birthDayAsString)) {
+                !Pattern.matches("^(19[0-9]{2}|20[0-2][0-5])/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$",
+                        birthDayAsString)) {
             inputInvalid("birthDay");
-            getBirthDay(scanner);
+            return getBirthDay(scanner);
         }
-        assert birthDayAsString != null;
         return LocalDate.parse(birthDayAsString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
 
